@@ -1,0 +1,47 @@
+<div class="container">
+  <!-- <div *ngIf="this.LoaderService.loadStatus | async;  then LOADER else PRODUCT"></div> -->
+  <div *ngIf="productInfo.image  then PRODUCT  else LOADER"></div>
+  <ng-template #LOADER>
+    <div class="loader d-flex justify-content-center align-items-center">
+      <img src="../../assets/preloader.gif" alt="Loading">
+    </div>
+  </ng-template>
+  <ng-template #PRODUCT>
+    <div class="card border-0 py-5 d-flex flex-row align-items-center">
+      <img src="{{productInfo.image}}" class="card-img-top me-5" alt="{{productInfo.description}}">
+      <div class="card-body">
+        <h3 class="card-title">{{productInfo.name}}</h3>
+        <p class="card-text text-muted">
+          {{productInfo.description}}
+        </p>
+        <p class="text-muted">
+          {{productInfo.createdAt | date : 'dd / MMMM / YYYY'}}
+        </p>
+        <h4 class="card-text">
+          {{productInfo.price | currency : 'EGP '}}
+        </h4>
+        <div *ngIf="productInfo.count > 0; then INSTOCK else OUTSTOCK"></div>
+        <ng-template #INSTOCK>
+          <p class="text-success card-text">in stock</p>
+        </ng-template>
+        <ng-template #OUTSTOCK>
+          <p class="text-danger card-text">out of stock</p>
+        </ng-template>
+        <p class="text-info">
+          Rate : {{productInfo.rate}}
+        </p>
+        <div>
+          <h5> Reviews </h5>
+          <p class="text-muted" *ngFor="let review of productInfo.reviews">
+            {{review}}
+          </p>
+        </div>
+        <button [disabled]="!isLoggedIn" class="btn btn-success me-3" (click)="addToCartHandler(productInfo)">
+          Add to cart</button>
+        <button [disabled]="!isLoggedIn" class="btn btn-danger mx-auto" (click)="addToWishListHandler(productInfo)">
+          Add to wishlist</button>
+      </div>
+    </div>
+  </ng-template>
+
+</div>

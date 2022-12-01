@@ -1,0 +1,11 @@
+.navbar-icons {
+  position: relative;
+}
+.items-counter {
+  position: absolute;
+  top: 0;
+  right: -5px;
+  width: 20px;
+  height: 20px;
+  font-size: 10px;
+}

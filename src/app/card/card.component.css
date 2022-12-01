@@ -1,0 +1,11 @@
+.card {
+  cursor: pointer;
+}
+.card img {
+  height: 250px;
+}
+h4 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

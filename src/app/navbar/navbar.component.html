@@ -1,0 +1,27 @@
+<nav class="navbar navbar-dark bg-dark py-2">
+  <div class="container-fluid">
+    <a routerLink="productsList" class="navbar-brand">Products</a>
+    <div class="d-flex">
+      <a [ngClass]="{'d-none': !isLoggedIn, 'd-inline' : isLoggedIn}" routerLink="wishlist" title="add to wishlist"
+        class="navbar-icons btn btn-outline-light border-0 me-3 fs-5">
+        <i class="bi bi-heart"></i>
+        <span
+          class="items-counter rounded-circle bg-danger text-light fw-bold d-flex justify-content-center align-items-center">{{wishlistLength}}</span>
+      </a>
+      <a [ngClass]="{'d-none': !isLoggedIn,  'd-inline' : isLoggedIn}" routerLink="cart" title="add to cart"
+        class="navbar-icons btn btn-outline-light border-0 me-3 fs-5">
+        <i class="bi bi-cart"></i>
+        <span
+          class="items-counter rounded-circle bg-danger text-light fw-bold d-flex justify-content-center align-items-center">{{this.productsService.cartItems.length}}</span>
+      </a>
+      <div *ngIf="isLoggedIn; then LOGOUT else LOGIN"></div>
+      <ng-template #LOGIN>
+        <a routerLink="signup" class="btn btn-outline-light me-3">Sign up</a>
+        <a routerLink="login" class="btn btn-outline-light">Login</a>
+      </ng-template>
+      <ng-template #LOGOUT>
+        <a (click)="logoutHandler()" class="btn btn-outline-light">Logout</a>
+      </ng-template>
+    </div>
+  </div>
+</nav>

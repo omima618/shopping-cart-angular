@@ -1,0 +1,73 @@
+<div class="container py-5">
+  <form (change)="changeHandler()" [formGroup]="signupForm" (ngSubmit)="submitHandler()" class="w-75 mx-auto">
+    <!-- username -->
+    <div class="mb-4">
+      <label for="username" class="form-label">Username</label>
+      <input type="text" class="form-control" id="username" aria-describedby="nameHelp" formControlName="username" />
+      <div *ngIf="
+          formControls['username'].touched && !formControls['username'].valid
+        ">
+        <div id="nameHelp" *ngIf="
+            formControls['username'].errors &&
+            formControls['username'].errors['required']
+          " class="form-text text-danger">
+          This field is required *
+        </div>
+      </div>
+    </div>
+    <!-- email  -->
+    <div class="mb-4">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" class="form-control" id="email" formControlName="email" />
+      <div *ngIf="
+          (formControls['email'].touched && !formControls['email'].valid)
+        ">
+        <div *ngIf="formControls['email'].errors && formControls['email'].errors['required']"
+          class="form-text text-danger">
+          This field is required *
+        </div>
+        <div
+          *ngIf="formControls['email'].errors && (formControls['email'].errors['email'] || formControls['email'].errors['pattern'])"
+          class="form-text text-danger">
+          Enter valid email !
+        </div>
+      </div>
+    </div>
+    <!-- password -->
+    <div class="mb-4">
+      <label for="password" class="form-label">Password</label>
+      <input type="password" #pass class="form-control" id="password" formControlName="password" />
+      <div *ngIf="
+          (formControls['password'].touched && !formControls['password'].valid)
+        ">
+        <div *ngIf="formControls['password'].errors && formControls['password'].errors['required']"
+          class="form-text text-danger">
+          This field is required *
+        </div>
+        <div *ngIf="formControls['password'].errors && (
+          formControls['password'].errors['minlength'] || formControls['password'].errors['pattern'])"
+          class="form-text text-danger">
+          Password must contain at least one number, an uppercase, a
+          lowercase letter, one special character and at least 8 characters.
+        </div>
+      </div>
+    </div>
+    <!-- confirm password -->
+    <div class="mb-4">
+      <label for="password" class="form-label">Confirm password</label>
+      <input type="password" #confirmPass class="form-control" id="confirmPassword" formControlName="confirmPassword" />
+      <div class="form-text text-danger" *ngIf="formControls['confirmPassword'].touched">
+        <div class="form-text text-danger" *ngIf="confirmPass.value != '' && confirmPass.value != pass.value">
+          Password not match
+        </div>
+        <div class="form-text text-danger" *ngIf="formControls['confirmPassword'].errors?.['required']">
+          This field is required *
+        </div>
+      </div>
+    </div>
+    <button (click)="submitHandler()" [disabled]="signupForm.status == 'INVALID' || confirmPass.value != pass.value"
+      type="submit" routerLink="/productsList" class="btn btn-outline-dark d-block w-auto px-5 py-2 mt-3 mx-auto">Create
+      account</button>
+    <p class="text-center mt-4">Already have account? <a class="text-dark" routerLink="../login">Login</a> </p>
+  </form>
+</div>

@@ -1,0 +1,18 @@
+<section class="products py-5">
+  <div class="container">
+    <div class="row">
+      <!-- <div *ngIf="this.loaderService.loadStatus | async; then LOADER else CARDS"></div> -->
+      <div *ngIf="productsList.length > 0;  then CARDS else LOADER"></div>
+      </div>
+      <ng-template #LOADER>
+        <div class="loader d-flex justify-content-center align-items-center">
+          <img src="../../assets/preloader.gif" alt="Loading">
+        </div>
+      </ng-template>
+      <ng-template #CARDS>
+        <div class="col-12 col-md-6 col-lg-4 mb-4" *ngFor="let product of productsList">
+          <app-card [product]="product"></app-card>
+        </div>
+      </ng-template>
+    </div>
+</section>
