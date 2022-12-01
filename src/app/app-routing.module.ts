@@ -15,6 +15,10 @@ const routes: Routes = [
     component: ProductsListComponent,
   },
   {
+    path: 'shopping-cart-angular',
+    component: ProductsListComponent,
+  },
+  {
     path: 'productsList',
     component: ProductsListComponent,
   },
